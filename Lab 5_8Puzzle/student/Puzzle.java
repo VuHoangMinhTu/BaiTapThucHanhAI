@@ -107,17 +107,41 @@ public class Puzzle {
 
 		else if (operator == 'd') {// Case-2: Move tile DOWN
 			/* Enter your code here */
-
+			int row = whiteTile[0] + 1;
+			int col = whiteTile[1];
+			if (row < MAX_ROW) { // Check if the new position is within the grid
+				int tmp = currentState.getTile(row, col);
+				result.updateTile(row, col, 0); // Move white tile down
+				result.updateTile(whiteTile[0], whiteTile[1], tmp); // Move the tile above down
+				result.setH(computeH2(result)); // Recompute heuristic
+				return result;
+			}
 		}
 
 		else if (operator == 'l') {// Case-3: Move tile LEFT
 			/* Enter your code here */
-
+			int row = whiteTile[0];
+			int col = whiteTile[1] - 1;
+			if (col >= 0) { // Check if the new position is within the grid
+				int tmp = currentState.getTile(row, col);
+				result.updateTile(row, col, 0); // Move white tile left
+				result.updateTile(whiteTile[0], whiteTile[1], tmp); // Move the tile on the right left
+				result.setH(computeH2(result)); // Recompute heuristic
+				return result;
+			}
 		}
 
 		else if (operator == 'r') {// Case-4: Move tile RIGHT
 			/* Enter your code here */
-
+			int row = whiteTile[0];
+			int col = whiteTile[1] + 1;
+			if (col < MAX_COL) { // Check if the new position is within the grid
+				int tmp = currentState.getTile(row, col);
+				result.updateTile(row, col, 0); // Move white tile right
+				result.updateTile(whiteTile[0], whiteTile[1], tmp); // Move the tile on the left right
+				result.setH(computeH2(result)); // Recompute heuristic
+				return result;
+			}
 		}
 		return null;
 	}
